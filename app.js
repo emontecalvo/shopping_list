@@ -5,6 +5,7 @@ $(function() {
 
   function addItem (state, item) {
     state.items.push(item);
+    $(".value").text(state.items.length);
   };
 
   function removeItem (state, item) {
@@ -15,6 +16,7 @@ $(function() {
       }
     }
     state.items = newItems;
+    $(".value").text(state.items.length);
   };
 
   function renderList (state, element) {
@@ -41,7 +43,7 @@ $(function() {
     if (currentItem.hasClass("shopping-item__checked")) {
       currentItem.removeClass("shopping-item__checked");
     } else {
-      SucurrentItem.addClass("shopping-item__checked");
+      currentItem.addClass("shopping-item__checked");
     };
   });
 
