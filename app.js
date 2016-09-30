@@ -7,6 +7,16 @@ $(function() {
     state.items.push(item);
   };
 
+  function removeItem (state, item) {
+    var newItems = [];
+    for (var i = 0; i < state.items.length; i++) {
+      if (state.items[i] !== item) {
+        newItems.push(state.items[i]);
+      }
+    }
+    state.items = newItems;
+  };
+
   function renderList (state, element) {
     var htmlItems = state.items.map(function (item) {
       return "<li> " + 
@@ -35,10 +45,16 @@ $(function() {
     };
   });
 
+  $(document).delegate(".shopping-item-delete", "click", function(){
+      var itemToDelete = $(this).parent().siblings().html();
+      var garbage = $(this).parent().siblings().parent();
+      garbage.remove();
+      removeItem(state, itemToDelete);
+  });
+
   $("#js-shopping-list-form").submit(function(event) {
     event.preventDefault();
     addItem (state, $("#shopping-list-entry").val());
-    console.log(state);
     renderList(state, $(".shopping-list"));
   });
 
